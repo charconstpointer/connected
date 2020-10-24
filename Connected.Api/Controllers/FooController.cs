@@ -17,6 +17,6 @@ namespace Connected.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok();
+        public async Task<IActionResult> Get() => Ok(_connectedContext.Groups);
     }
 }
