@@ -9,6 +9,7 @@ namespace Connected.Api.Domain.Entities
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
+        public User Author { get; set; }
         public Item Item { get; set; }
     }
 }

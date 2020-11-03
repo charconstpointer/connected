@@ -25,6 +25,7 @@ namespace Connected.Api.Persistence
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Comment> Comments { get; set; }

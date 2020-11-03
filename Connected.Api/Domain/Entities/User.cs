@@ -16,6 +16,8 @@ namespace Connected.Api.Domain.Entities
         public string Password { get; set; }
         public string Email { get; set; }
         public IEnumerable<Group> CreatedGroups { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Item> Items { get; set; }
         public IEnumerable<UserGroup> Groups { get; set; }
     }
 

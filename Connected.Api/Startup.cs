@@ -1,3 +1,4 @@
+using Connected.Api.Domain.Entities;
 using Connected.Api.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
