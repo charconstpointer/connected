@@ -11,6 +11,7 @@ namespace Connected.Api.Posts.Commands
     {
         public int GroupId { get; set; }
         public string Name { get; set; }
+        public int PostId { get; set; }
     }
     
     public class UpdatePostHandler : IRequestHandler<UpdatePost>

@@ -10,11 +10,7 @@ namespace Connected.Api.Posts.Commands
     public class DeletePost : IRequest
     {
         public int GroupId { get; set; }
-
-        public DeletePost(int groupId)
-        {
-            GroupId = groupId;
-        }
+        public int PostId { get; set; }
     }
 
     public class DeletePostHandler : IRequestHandler<DeletePost>

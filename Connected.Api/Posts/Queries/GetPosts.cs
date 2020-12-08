@@ -8,6 +8,7 @@ namespace Connected.Api.Posts.Queries
 {
     public class GetPosts : IRequest<object>
     {
+        public int GroupId { get; set; }
     }
     public class GetPostsHandler : IRequestHandler<GetPosts, object>
     {

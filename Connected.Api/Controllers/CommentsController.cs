@@ -18,7 +18,11 @@ namespace Connected.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetComments(int groupId, int postId) => Ok();
+        public async Task<IActionResult> GetComments(int groupId, int postId)
+        {
+            var command = new GetComments {GroupId = groupId, PostId = postId};
+            return Ok(await _mediator.Send(command));
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateComment(int groupId, int postId, CreateComment createComment)
@@ -41,7 +45,7 @@ namespace Connected.Api.Controllers
         [HttpDelete("{commentId:int}")]
         public async Task<IActionResult> DeleteComment(int groupId, int postId, int commentId)
         {
-            var command = new DeleteComment(groupId, commentId);
+            var command = new DeleteComment {GroupId = groupId, PostId = postId, CommentId = commentId};
             return Ok(await _mediator.Send(command));
         }
     }

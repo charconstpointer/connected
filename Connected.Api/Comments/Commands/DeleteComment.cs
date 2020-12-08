@@ -10,12 +10,7 @@ namespace Connected.Api.Comments.Commands
     {
         public int GroupId { get; set; }
         public int CommentId { get; set; }
-
-        public DeleteComment(int groupId, int commentId)
-        {
-            GroupId = groupId;
-            CommentId = commentId;
-        }
+        public int PostId { get; set; }
     }
 
     public class DeleteCommentHandler : IRequestHandler<DeleteComment>
