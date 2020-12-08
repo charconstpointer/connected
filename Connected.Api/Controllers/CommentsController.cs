@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Connected.Api.Controllers
 {
     [ApiController]
-    [Route("Groups/{groupId:int}/posts/{postId:int}[controller]")]
+    [Route("Groups/{groupId:int}/posts/{postId:int}/[controller]")]
     public class CommentsController : ControllerBase
     {
         [HttpGet]
