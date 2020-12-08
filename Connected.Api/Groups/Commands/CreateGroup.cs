@@ -1,11 +1,11 @@
-﻿using Connected.Api.Domain.Entities;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Connected.Api.Domain.Entities;
 using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Connected.Api.Groups
+namespace Connected.Api.Groups.Commands
 {
     public class CreateGroup : IRequest
     {

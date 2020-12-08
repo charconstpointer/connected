@@ -5,7 +5,7 @@ using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Connected.Api.Groups
+namespace Connected.Api.Groups.Commands
 {
     public class DeleteGroup : IRequest
     {

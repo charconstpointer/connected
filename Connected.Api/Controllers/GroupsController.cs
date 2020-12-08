@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Connected.Api.Groups;
+using Connected.Api.Groups.Commands;
+using Connected.Api.Groups.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

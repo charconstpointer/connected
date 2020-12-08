@@ -1,10 +1,10 @@
-﻿using Connected.Api.Persistence;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Connected.Api.Groups
+namespace Connected.Api.Groups.Queries
 {
     public class GetGroups : IRequest<object>
     {
