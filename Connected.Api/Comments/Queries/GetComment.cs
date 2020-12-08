@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Connected.Api.Comments.Extensions;
 using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace Connected.Api.Comments.Queries
         public async Task<object> Handle(GetComment request, CancellationToken cancellationToken)
         {
             var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == request.CommentId, cancellationToken: cancellationToken);
-            return comment;
+            return comment.AsDto();
         }
     }
 }
