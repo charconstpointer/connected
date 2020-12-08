@@ -7,30 +7,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Connected.Api.Groups
 {
-    public class UpdateGroup : IRequest
+    public class DeleteGroup : IRequest
     {
         public int GroupId { get; set; }
-        public string Name { get; set; }
+
+        public DeleteGroup(int groupId)
+        {
+            GroupId = groupId;
+        }
     }
-    
-    public class UpdateGroupHandler : IRequestHandler<UpdateGroup>
+
+    public class DeleteGroupHandler : IRequestHandler<DeleteGroup>
     {
         private readonly ConnectedContext _context;
 
-        public UpdateGroupHandler(ConnectedContext context)
+        public DeleteGroupHandler(ConnectedContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(UpdateGroup request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteGroup request, CancellationToken cancellationToken)
         {
             var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
-            if (@group == null)
+            if (group is null)
             {
                 throw new ApplicationException($"Group with id {request.GroupId} could not be found");
             }
 
-            group.Name = request.Name;
+            _context.Groups.Remove(group);
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
