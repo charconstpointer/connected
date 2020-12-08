@@ -22,6 +22,10 @@ namespace Connected.Api.Persistence
                 .HasOne(bc => bc.Group)
                 .WithMany(c => c.Users)
                 .HasForeignKey(bc => bc.GroupId);
+            modelBuilder.Entity<Feed>()
+                .Ignore(f => f.Group)
+                .HasKey(f => f.Id);
+
         }
 
         public DbSet<User> Users { get; set; }

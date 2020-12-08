@@ -16,6 +16,7 @@ namespace Connected.Api.Posts.Commands
         public string Body { get; set; }
         public string Url { get; set; }
     }
+
     public class CreatePostHandler : IRequestHandler<CreatePost>
     {
         private readonly ConnectedContext _context;
@@ -30,16 +31,17 @@ namespace Connected.Api.Posts.Commands
         public async Task<Unit> Handle(CreatePost request, CancellationToken cancellationToken)
         {
             var group = await _context.Groups
-                .Include(g=>g.Feed)
-                .ThenInclude(f=>f.Items)
-                .ThenInclude(i=>i.Comments)
+                .Include(g => g.Feed)
+                .ThenInclude(f => f.Items)
+                .ThenInclude(i => i.Comments)
                 .FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
             if (group is null)
             {
                 throw new ApplicationException($"Group with id {request.GroupId} could not be found");
             }
 
-            var post = new Item(request.Body);
+            //TODO Poster
+            var post = new Item(request.Body, null);
             group.AddPost(post);
             await _context.Items.AddAsync(post, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

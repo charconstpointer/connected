@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace Connected.Api.Domain.Entities
 {
@@ -12,7 +11,6 @@ namespace Connected.Api.Domain.Entities
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
         public IList<Item> Items { get; set; } 
-        [JsonIgnore]
         public Group Group { get; set; }
 
         public Feed(Group group)
