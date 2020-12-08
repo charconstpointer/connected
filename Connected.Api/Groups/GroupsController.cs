@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Connected.Api.Groups;
 using Connected.Api.Groups.Commands;
 using Connected.Api.Groups.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Connected.Api.Controllers
+namespace Connected.Api.Groups
 {
     [ApiController]
     [Route("[controller]")]

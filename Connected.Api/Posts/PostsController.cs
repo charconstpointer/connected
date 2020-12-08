@@ -4,7 +4,7 @@ using Connected.Api.Posts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Connected.Api.Controllers
+namespace Connected.Api.Posts
 {
     [ApiController]
     [Route("Groups/{groupId:int}/[controller]")]

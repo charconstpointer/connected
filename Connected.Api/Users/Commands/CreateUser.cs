@@ -4,7 +4,7 @@ using Connected.Api.Domain.Entities;
 using Connected.Api.Persistence;
 using MediatR;
 
-namespace Connected.Api.Users
+namespace Connected.Api.Users.Commands
 {
     public class CreateUser : IRequest
     {

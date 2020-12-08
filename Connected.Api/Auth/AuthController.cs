@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Connected.Api.Controllers
+namespace Connected.Api.Auth
 {
     [ApiController]
     [Route("[controller]")]

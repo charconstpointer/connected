@@ -4,7 +4,7 @@ using Connected.Api.Comments.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Connected.Api.Controllers
+namespace Connected.Api.Comments
 {
     [ApiController]
     [Route("Groups/{groupId:int}/posts/{postId:int}/[controller]")]

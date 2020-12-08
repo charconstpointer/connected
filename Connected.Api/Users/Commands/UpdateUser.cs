@@ -4,7 +4,7 @@ using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Connected.Api.Users
+namespace Connected.Api.Users.Commands
 {
     public class UpdateUser : IRequest
     {

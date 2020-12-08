@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Connected.Api.Persistence;
-using Connected.Api.Users;
+using Connected.Api.Users.Commands;
+using Connected.Api.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Connected.Api.Controllers
+namespace Connected.Api.Users
 {
     [ApiController]
     [Route("[controller]")]
