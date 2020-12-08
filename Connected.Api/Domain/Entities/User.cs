@@ -10,9 +10,9 @@ namespace Connected.Api.Domain.Entities
     public class User : Guest
     {
         [Key] public int Id { get; private set; }
-        public string Username { get; private set; }
-        public string Password { get; private set; }
-        public string Email { get; private set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public IEnumerable<Group> CreatedGroups { get; private set; }
         public IEnumerable<Comment> Comments { get; private set; }
         public IEnumerable<Item> Items { get; private set; }
