@@ -28,7 +28,7 @@ namespace Connected.Api.Comments.Queries
             var post = _context.Groups
                 .Include(g => g.Feed)
                 .ThenInclude(f => f.Items)
-                .ThenInclude(i=>i.Comments)
+                .ThenInclude(i => i.Comments)
                 .FirstOrDefault(g => g.Id == request.GroupId)
                 ?.Feed.Items.FirstOrDefault(i => i.Id == request.PostId);
 

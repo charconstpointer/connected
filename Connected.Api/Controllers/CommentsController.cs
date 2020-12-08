@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Connected.Api.Comments.Commands;
+using Connected.Api.Comments.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,11 @@ namespace Connected.Api.Controllers
         }
 
         [HttpGet("{commentId:int}")]
-        public async Task<IActionResult> GetComment(int groupId, int postId, int commentId) => Ok();
+        public async Task<IActionResult> GetComment(int groupId, int postId, int commentId)
+        {
+            var command = new GetComment { GroupId = groupId, PostId = postId, CommentId = commentId };
+            return Ok(await _mediator.Send(command));
+        }
 
         [HttpPut("{commentId:int}")]
         public async Task<IActionResult> UpdateComment(int groupId, int postId, int commentId) => Ok();
