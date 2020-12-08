@@ -13,13 +13,13 @@ namespace Connected.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateComment(int groupId, int postId) => Ok();
 
-        [HttpGet("commentId:int")]
+        [HttpGet("{commentId:int}")]
         public async Task<IActionResult> GetComment(int groupId, int postId, int commentId) => Ok();
 
-        [HttpPut("commentId:int")]
+        [HttpPut("{commentId:int}")]
         public async Task<IActionResult> UpdateComment(int groupId, int postId, int commentId) => Ok();
 
-        [HttpDelete("commentId:int")]
+        [HttpDelete("{commentId:int}")]
         public async Task<IActionResult> DeleteComment(int groupId, int postId, int commentId) => Ok();
     }
 }
