@@ -21,7 +21,18 @@ namespace Connected.Api.Domain.Entities
         {
             Name = name;
             Tags = tags;
+            Feed = new Feed(this);
+            Users = new List<UserGroup>();
         }
-        
+        private Group() { }
+        public void AddPost(Item item)
+        {
+            if (item is null)
+            {
+                throw new ApplicationException("Item cannot be null");
+            }
+
+            Feed.Items.Add(item);
+        }
     }
 }

@@ -20,7 +20,13 @@ namespace Connected.Api.Groups.Queries
 
         public async Task<object> Handle(GetGroups request, CancellationToken cancellationToken)
         {
-            var groups = await _context.Groups.ToListAsync(cancellationToken);
+            var groups = await _context.Groups
+                .Include(g=>g.Feed)
+                .ThenInclude(f=>f.Items)
+                .ThenInclude(i=>i.Comments)
+                .Include(g=>g.Users)
+                .Include(g=>g.Creator)
+                .ToListAsync(cancellationToken);
             return groups;
         }
     }
