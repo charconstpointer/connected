@@ -51,6 +51,5 @@ riderModule.iml
 /.vs
 /Connected.Api/Properties
 /Connected.Api/Connected.Api.csproj.user
-/.idea/
-/.vscode/
-/.vscode/
+/.idea/**
+/.vscode/**
