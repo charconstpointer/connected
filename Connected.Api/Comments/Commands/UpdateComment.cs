@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
@@ -10,9 +11,11 @@ namespace Connected.Api.Comments.Commands
     public class UpdateGroup : IRequest
     {
         public int GroupId { get; set; }
-        public string Name { get; set; }
+        public int PostId { get; set; }
+        public int CommentId { get; set; }
+        public string Content { get; set; }
     }
-    
+
     public class UpdateGroupHandler : IRequestHandler<UpdateGroup>
     {
         private readonly ConnectedContext _context;
@@ -24,13 +27,16 @@ namespace Connected.Api.Comments.Commands
 
         public async Task<Unit> Handle(UpdateGroup request, CancellationToken cancellationToken)
         {
-            var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
-            if (@group == null)
+            var comment =
+                await _context.Comments.FirstOrDefaultAsync(c => c.Id == request.CommentId, cancellationToken);
+
+
+            if (comment is null)
             {
-                throw new ApplicationException($"Group with id {request.GroupId} could not be found");
+                throw new ApplicationException();
             }
 
-            group.Name = request.Name;
+            comment.Content = request.Content;
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

@@ -2,20 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Connected.Api.Domain.Entities
 {
     public class Group
     {
-        [Key]
-        public int Id { get; set; }
+        [Key] public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public string Name { get; set; }
         public string Tags { get; set; }
         public User Creator { get; set; }
         public IEnumerable<UserGroup> Users { get; set; }
-        [ForeignKey("FeedId")]
-        public Feed Feed { get; set; }
+        [ForeignKey("FeedId")] public Feed Feed { get; set; }
 
         public Group(string name, string tags)
         {
@@ -24,7 +23,11 @@ namespace Connected.Api.Domain.Entities
             Feed = new Feed(this);
             Users = new List<UserGroup>();
         }
-        private Group() { }
+
+        private Group()
+        {
+        }
+
         public void AddPost(Item item)
         {
             if (item is null)
@@ -34,5 +37,7 @@ namespace Connected.Api.Domain.Entities
 
             Feed.Items.Add(item);
         }
+
+        public Item GetById(int postId) => Feed?.Items.FirstOrDefault(p => p.Id == postId);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
 using MediatR;
@@ -10,10 +9,12 @@ namespace Connected.Api.Comments.Commands
     public class DeleteComment : IRequest
     {
         public int GroupId { get; set; }
+        public int CommentId { get; set; }
 
-        public DeleteComment(int groupId)
+        public DeleteComment(int groupId, int commentId)
         {
             GroupId = groupId;
+            CommentId = commentId;
         }
     }
 
@@ -28,13 +29,9 @@ namespace Connected.Api.Comments.Commands
 
         public async Task<Unit> Handle(DeleteComment request, CancellationToken cancellationToken)
         {
-            var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
-            if (group is null)
-            {
-                throw new ApplicationException($"Group with id {request.GroupId} could not be found");
-            }
-
-            _context.Groups.Remove(group);
+            var comment =
+                await _context.Comments.FirstOrDefaultAsync(c => c.Id == request.CommentId, cancellationToken);
+            _context.Comments.Remove(comment);
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

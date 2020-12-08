@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
 using MediatR;
@@ -8,7 +10,10 @@ namespace Connected.Api.Comments.Queries
 {
     public class GetComments : IRequest<object>
     {
+        public int GroupId { get; set; }
+        public int PostId { get; set; }
     }
+
     public class GetCommentsHandler : IRequestHandler<GetComments, object>
     {
         private readonly ConnectedContext _context;
@@ -20,8 +25,20 @@ namespace Connected.Api.Comments.Queries
 
         public async Task<object> Handle(GetComments request, CancellationToken cancellationToken)
         {
-            var groups = await _context.Groups.ToListAsync(cancellationToken);
-            return groups;
+            var post = _context.Groups
+                .Include(g => g.Feed)
+                .ThenInclude(f => f.Items)
+                .ThenInclude(i=>i.Comments)
+                .FirstOrDefault(g => g.Id == request.GroupId)
+                ?.Feed.Items.FirstOrDefault(i => i.Id == request.PostId);
+
+
+            if (post is null)
+            {
+                throw new ApplicationException();
+            }
+
+            return post.Comments;
         }
     }
 }
