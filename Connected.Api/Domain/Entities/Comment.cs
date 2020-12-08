@@ -11,14 +11,14 @@ namespace Connected.Api.Domain.Entities
         public DateTime CreateDate { get; private set; }
         public User Author { get; private set; }
         [JsonIgnore]
-        public Item Item { get; private set; }
+        public Post Post { get; private set; }
 
-        public Comment(string content, User author, Item item = null)
+        public Comment(string content, User author, Post post = null)
         {
             CreateDate = DateTime.UtcNow;
             Author = author;
             Content = content;
-            Item = item;
+            Post = post;
         }
 
         private Comment()

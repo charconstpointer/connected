@@ -33,6 +33,6 @@ namespace Connected.Api.Persistence
         public DbSet<Group> Groups { get; set; }
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Item> Items { get; set; }
+        public DbSet<Post> Items { get; set; }
     }
 }

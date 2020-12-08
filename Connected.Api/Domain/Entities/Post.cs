@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Connected.Api.Domain.Entities
 {
-    public class Item
+    public class Post
     {
         [Key] public int Id { get; private set; }
         public string Body { get; private set; }
@@ -15,7 +15,7 @@ namespace Connected.Api.Domain.Entities
         public Group Group { get; set; }
         public IList<Comment> Comments { get; private set; }
 
-        public Item(string body, User poster, Group group)
+        public Post(string body, User poster, Group group)
         {
             Body = body;
             Comments = new List<Comment>();
@@ -24,7 +24,7 @@ namespace Connected.Api.Domain.Entities
             Group = group;
         }
 
-        private Item()
+        private Post()
         {
         }
 

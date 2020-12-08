@@ -15,7 +15,7 @@ namespace Connected.Api.Domain.Entities
         public string Email { get; set; }
         public IEnumerable<Group> CreatedGroups { get; private set; }
         public IEnumerable<Comment> Comments { get; private set; }
-        public IEnumerable<Item> Items { get; private set; }
+        public IEnumerable<Post> Items { get; private set; }
         public IEnumerable<UserGroup> Groups { get; private set; }
 
         public User(string username, string password, string email)
@@ -25,7 +25,7 @@ namespace Connected.Api.Domain.Entities
             Email = email;
             CreatedGroups = new List<Group>();
             Comments = new List<Comment>();
-            Items = new List<Item>();
+            Items = new List<Post>();
             Groups = new List<UserGroup>();
         }
 

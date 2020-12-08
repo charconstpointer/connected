@@ -42,7 +42,7 @@ namespace Connected.Api.Posts.Commands
             }
 
             //TODO Poster
-            var post = new Item(request.Body, null, group);
+            var post = new Post(request.Body, null, group);
             group.AddPost(post);
             await _context.Items.AddAsync(post, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

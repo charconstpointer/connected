@@ -11,7 +11,7 @@ namespace Connected.Api.Domain.Entities
         public int Id { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
-        public IList<Item> Items { get; set; } 
+        public IList<Post> Items { get; set; } 
         [JsonIgnore]
         public Group Group { get; set; }
 
@@ -19,7 +19,7 @@ namespace Connected.Api.Domain.Entities
         {
             Group = group;
             CreateDate = DateTime.UtcNow;
-            Items = new List<Item>();
+            Items = new List<Post>();
         }
 
         private Feed() { }

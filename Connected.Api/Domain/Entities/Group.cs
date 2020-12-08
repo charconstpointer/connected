@@ -28,16 +28,16 @@ namespace Connected.Api.Domain.Entities
         {
         }
 
-        public void AddPost(Item item)
+        public void AddPost(Post post)
         {
-            if (item is null)
+            if (post is null)
             {
                 throw new ApplicationException("Item cannot be null");
             }
 
-            Feed.Items.Add(item);
+            Feed.Items.Add(post);
         }
 
-        public Item GetById(int postId) => Feed?.Items.FirstOrDefault(p => p.Id == postId);
+        public Post GetById(int postId) => Feed?.Items.FirstOrDefault(p => p.Id == postId);
     }
 }
