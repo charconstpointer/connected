@@ -10,6 +10,7 @@ namespace Connected.Api.Domain.Entities
         [Key]
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Name { get; set; }
         public string Tags { get; set; }
         public User Creator { get; set; }
         public IEnumerable<UserGroup> Users { get; set; }
