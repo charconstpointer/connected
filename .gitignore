@@ -48,3 +48,6 @@ riderModule.iml
 /.idea/.idea.Connected/.idea/dataSources/849e91a0-2c7c-4a66-9c51-4b4c2ab94847/storage_v2/_src_/database/master.YiqNvw/schema/sys.zb4BAA.meta
 /.idea/.idea.Connected/.idea/vcs.xml
 /.idea/.idea.Connected/.idea/workspace.xml
+/.vs
+/Connected.Api/Properties
+/Connected.Api/Connected.Api.csproj.user

@@ -13,11 +13,11 @@ namespace Connected.Api.Persistence
         {
             modelBuilder.Entity<User>(u => u.HasMany(x => x.CreatedGroups).WithOne(x => x.Creator));
             modelBuilder.Entity<UserGroup>()
-                .HasKey(bc => new { bc.UserId, bc.GroupId });  
+                .HasKey(bc => new { bc.UserId, bc.GroupId });
             modelBuilder.Entity<UserGroup>()
                 .HasOne(bc => bc.User)
                 .WithMany(b => b.Groups)
-                .HasForeignKey(bc => bc.UserId);  
+                .HasForeignKey(bc => bc.UserId);
             modelBuilder.Entity<UserGroup>()
                 .HasOne(bc => bc.Group)
                 .WithMany(c => c.Users)
