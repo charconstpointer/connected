@@ -16,5 +16,12 @@ namespace Connected.Api.Domain.Entities
         public IEnumerable<UserGroup> Users { get; set; }
         [ForeignKey("FeedId")]
         public Feed Feed { get; set; }
+
+        public Group(string name, string tags)
+        {
+            Name = name;
+            Tags = tags;
+        }
+        
     }
 }

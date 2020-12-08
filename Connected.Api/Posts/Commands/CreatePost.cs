@@ -24,8 +24,8 @@ namespace Connected.Api.Posts.Commands
 
         public async Task<Unit> Handle(CreatePost request, CancellationToken cancellationToken)
         {
-            var group = new Group { Name = request.Name };
-            await _context.Groups.AddAsync(group, cancellationToken);
+            // var group = new Group { Name = request.Name };
+            // await _context.Groups.AddAsync(group, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Creating new group");
             return Unit.Value;

@@ -24,10 +24,10 @@ namespace Connected.Api.Comments.Commands
 
         public async Task<Unit> Handle(CreateComment request, CancellationToken cancellationToken)
         {
-            var group = new Group { Name = request.Name };
-            await _context.Groups.AddAsync(group, cancellationToken);
+            // var group = new Group { Name = request.Name };
+            // await _context.Groups.AddAsync(group, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation("Creating new group");
+            _logger.LogInformation("Creating new comment");
             return Unit.Value;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Domain.Entities;
 using Connected.Api.Persistence;
@@ -10,7 +11,9 @@ namespace Connected.Api.Groups.Commands
     public class CreateGroup : IRequest
     {
         public string Name { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
+
     public class CreateGroupHandler : IRequestHandler<CreateGroup>
     {
         private readonly ConnectedContext _context;
@@ -24,7 +27,8 @@ namespace Connected.Api.Groups.Commands
 
         public async Task<Unit> Handle(CreateGroup request, CancellationToken cancellationToken)
         {
-            var group = new Group { Name = request.Name };
+            var tags = string.Join(",", request.Tags);
+            var group = new Group(request.Name, tags);
             await _context.Groups.AddAsync(group, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Creating new group");
