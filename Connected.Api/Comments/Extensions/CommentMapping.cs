@@ -10,7 +10,7 @@ namespace Connected.Api.Comments.Extensions
         public static CommentDto AsDto(this Comment comment)
             => new CommentDto
             {
-                Author = comment.Author.Username,
+                Author = comment.Author?.Username,
                 Content = comment.Content,
                 Id = comment.Id,
                 CreateDate = comment.CreateDate

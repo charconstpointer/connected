@@ -19,8 +19,15 @@ namespace Connected.Api.Groups
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetGroups() 
+        public async Task<IActionResult> GetGroups()
             => Ok(await _mediator.Send(new GetGroups()));
+
+        [HttpGet("{groupId:int}")]
+        public async Task<IActionResult> GetGroup(int groupId)
+        {
+            var command = new GetGroup {GroupId = groupId};
+            return Ok(await _mediator.Send(command));
+        }
 
         [HttpPost]
         [Authorize]
@@ -29,14 +36,16 @@ namespace Connected.Api.Groups
             var headers = Request.Headers;
             return Created("", await _mediator.Send(createGroup));
         }
+
         [HttpPut("{groupId:int}")]
-        public async Task<IActionResult> UpdateGroup(int groupId,UpdateGroup updateGroup)
+        public async Task<IActionResult> UpdateGroup(int groupId, UpdateGroup updateGroup)
         {
             updateGroup.GroupId = groupId;
             return Ok(await _mediator.Send(updateGroup));
         }
 
-        [HttpDelete("{groupId:int}")] public async Task<IActionResult> DeleteGroup(int groupId)
+        [HttpDelete("{groupId:int}")]
+        public async Task<IActionResult> DeleteGroup(int groupId)
             => Ok(await _mediator.Send(new DeleteGroup(groupId)));
     }
 }

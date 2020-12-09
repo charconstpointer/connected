@@ -12,10 +12,10 @@ namespace Connected.Api.Posts.Extensions
         public static PostDto AsDto(this Post post)
             => new()
             {
-                Poster = post.Poster.AsDto(),
+                Poster = post.Poster?.AsDto(),
                 Body = post.Body,
                 Id = post.Id,
-                Comments = post.Comments.AsDto(),
+                Comments = post.Comments?.AsDto(),
                 PostDate = post.PostDate
             };
 

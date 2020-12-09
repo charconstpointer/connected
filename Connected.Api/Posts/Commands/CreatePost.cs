@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Connected.Api.Auth;
 
 namespace Connected.Api.Posts.Commands
 {
@@ -21,11 +22,14 @@ namespace Connected.Api.Posts.Commands
     {
         private readonly ConnectedContext _context;
         private readonly ILogger<CreatePostHandler> _logger;
+        private readonly IUserAccessor _userAccessor;
 
-        public CreatePostHandler(ILogger<CreatePostHandler> logger, ConnectedContext context)
+        public CreatePostHandler(ILogger<CreatePostHandler> logger, ConnectedContext context,
+            IUserAccessor userAccessor)
         {
             _logger = logger;
             _context = context;
+            _userAccessor = userAccessor;
         }
 
         public async Task<Unit> Handle(CreatePost request, CancellationToken cancellationToken)
@@ -35,14 +39,15 @@ namespace Connected.Api.Posts.Commands
                 .ThenInclude(f => f.Items)
                 .ThenInclude(i => i.Comments)
                 .FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
-            
+
             if (group is null)
             {
                 throw new ApplicationException($"Group with id {request.GroupId} could not be found");
             }
 
+            var user = await _userAccessor.GetUserFromContext(cancellationToken);
             //TODO Poster
-            var post = new Post(request.Body, null, group);
+            var post = new Post(request.Body, user, group);
             group.AddPost(post);
             await _context.Items.AddAsync(post, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

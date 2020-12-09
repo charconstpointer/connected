@@ -2,6 +2,7 @@
 using Connected.Api.Posts.Commands;
 using Connected.Api.Posts.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connected.Api.Posts
@@ -32,6 +33,7 @@ namespace Connected.Api.Posts
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreatePost(int groupId, CreatePost createPost)
         {
             createPost.GroupId = groupId;
@@ -39,6 +41,7 @@ namespace Connected.Api.Posts
         }
 
         [HttpPut("{postId:int}")]
+        [Authorize]
         public async Task<IActionResult> UpdatePost(int groupId, int postId, UpdatePost updatePost)
         {
             updatePost.GroupId = groupId;
@@ -47,6 +50,7 @@ namespace Connected.Api.Posts
         }
 
         [HttpDelete("{postId:int}")]
+        [Authorize]
         public async Task<IActionResult> DeletePost(int groupId, int postId)
         {
             var command = new DeletePost {GroupId = groupId, PostId = postId};

@@ -37,7 +37,7 @@ namespace Connected.Api.Domain.Entities
             {
                 throw new ApplicationException("Item cannot be null");
             }
-
+            
             Feed.Items.Add(post);
         }
 
