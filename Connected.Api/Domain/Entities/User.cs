@@ -13,7 +13,7 @@ namespace Connected.Api.Domain.Entities
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public IEnumerable<Group> CreatedGroups { get; private set; }
+        public IList<Group> CreatedGroups { get; private set; }
         public IEnumerable<Comment> Comments { get; private set; }
         public IEnumerable<Post> Items { get; private set; }
         public IEnumerable<UserGroup> Groups { get; private set; }

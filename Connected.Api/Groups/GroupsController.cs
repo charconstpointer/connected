@@ -2,6 +2,7 @@
 using Connected.Api.Groups.Commands;
 using Connected.Api.Groups.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Connected.Api.Groups
@@ -20,9 +21,14 @@ namespace Connected.Api.Groups
         [HttpGet]
         public async Task<IActionResult> GetGroups() 
             => Ok(await _mediator.Send(new GetGroups()));
+
         [HttpPost]
-        public async Task<IActionResult> CreateGroup(CreateGroup createGroup) 
-            => Created("", await _mediator.Send(createGroup));
+        [Authorize]
+        public async Task<IActionResult> CreateGroup(CreateGroup createGroup)
+        {
+            var headers = Request.Headers;
+            return Created("", await _mediator.Send(createGroup));
+        }
         [HttpPut("{groupId:int}")]
         public async Task<IActionResult> UpdateGroup(int groupId,UpdateGroup updateGroup)
         {

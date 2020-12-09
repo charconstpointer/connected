@@ -38,6 +38,7 @@ namespace Connected.Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }));
+            services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddDbContext<ConnectedContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MsSql")));
@@ -52,7 +53,7 @@ namespace Connected.Api
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuerSigningKey = false,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Key"])),
                         ValidateIssuer = false,
                         ValidateAudience = false,
@@ -72,10 +73,8 @@ namespace Connected.Api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
             app.UseCors();
             app.UseRouting();
-            
             app.UseAuthentication();
             app.UseAuthorization();
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

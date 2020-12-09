@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Connected.Api.Groups.Extensions;
 
 namespace Connected.Api.Domain.Entities
 {
@@ -16,12 +17,14 @@ namespace Connected.Api.Domain.Entities
         public IEnumerable<UserGroup> Users { get; set; }
         [ForeignKey("FeedId")] public Feed Feed { get; set; }
 
-        public Group(string name, string tags)
+        public Group(string name, string tags, User creator)
         {
             Name = name;
             Tags = tags;
             Feed = new Feed(this);
             Users = new List<UserGroup>();
+            Creator = creator;
+            creator.CreatedGroups.Add(this);
         }
 
         private Group()
