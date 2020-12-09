@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using Connected.Api.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -38,6 +39,7 @@ namespace Connected.Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }));
+            services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddDbContext<ConnectedContext>(options =>
