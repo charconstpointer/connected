@@ -64,7 +64,7 @@ namespace Connected.Api.Auth.Commands
                 {
                     new Claim(ClaimTypes.Name, username)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials =
                     new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_key)),
                         SecurityAlgorithms.HmacSha256Signature)
