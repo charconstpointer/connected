@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Connected.Api.Groups.Extensions;
 using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace Connected.Api.Groups.Queries
                 .Include(g=>g.Users)
                 .Include(g=>g.Creator)
                 .ToListAsync(cancellationToken);
-            return groups;
+            return groups.AsDto();
         }
     }
 }

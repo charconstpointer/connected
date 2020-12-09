@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
+using Connected.Api.Users.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,8 @@ namespace Connected.Api.Users.Queries
 
         public async Task<object> Handle(GetUser request, CancellationToken cancellationToken)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            var user =  await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            return user.AsDto();
         }
     }
 }

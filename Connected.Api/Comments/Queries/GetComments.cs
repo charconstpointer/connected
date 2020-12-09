@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Connected.Api.Comments.Extensions;
+﻿using Connected.Api.Comments.Extensions;
 using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Connected.Api.Comments.Queries
 {
@@ -32,6 +30,7 @@ namespace Connected.Api.Comments.Queries
                 .ThenInclude(p => p.Group)
                 .Where(c => c.Post.Group.Id == request.GroupId)
                 .ToListAsync(cancellationToken: cancellationToken);
+
             return comments.AsDto();
         }
     }

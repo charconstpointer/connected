@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
+using Connected.Api.Posts.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ namespace Connected.Api.Posts.Queries
                 throw new ApplicationException();
             }
 
-            return post;
+            return post.AsDto();
         }
     }
 }

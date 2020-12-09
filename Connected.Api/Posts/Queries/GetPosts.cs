@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Connected.Api.Groups.Extensions;
 using Connected.Api.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace Connected.Api.Posts.Queries
         public async Task<object> Handle(GetPosts request, CancellationToken cancellationToken)
         {
             var groups = await _context.Groups.ToListAsync(cancellationToken);
-            return groups;
+            return groups.AsDto();
         }
     }
 }

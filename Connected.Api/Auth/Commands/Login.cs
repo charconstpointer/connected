@@ -47,7 +47,7 @@ namespace Connected.Api.Auth.Commands
 
             if (request.Password != user.Password)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Could not login with provided credentials");
             }
 
             var token = CreateToken(user.Username);
