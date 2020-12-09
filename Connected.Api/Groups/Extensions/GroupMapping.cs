@@ -12,12 +12,12 @@ namespace Connected.Api.Groups.Extensions
         public static GroupDto AsDto(this Group group)
             => new()
             {
-                Creator = group.Creator.AsDto(),
+                Creator = group.Creator?.AsDto(),
                 Id = group.Id,
                 Name = group.Name,
                 Posts = group.Feed?.Items.AsDto(),
-                Tags = group.Tags.Split(","),
-                Users = group.Users.Select(u => u.User).AsDto(),
+                Tags = group.Tags?.Split(","),
+                Users = group.Users?.Select(u => u?.User)?.AsDto(),
                 CreateDate = group.CreateDate
             };
 
