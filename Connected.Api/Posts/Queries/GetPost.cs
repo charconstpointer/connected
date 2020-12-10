@@ -29,7 +29,7 @@ namespace Connected.Api.Posts.Queries
                 cancellationToken: cancellationToken);
             if (post is null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested post does not exist");
             }
 
             return post.AsDto();

@@ -38,13 +38,13 @@ namespace Connected.Api.Comments.Commands
                 cancellationToken: cancellationToken);
             if (@group == null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested group does not exist");
             }
 
             var post = group.GetById(request.PostId);
             if (post == null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested post doest not exist");
             }
 
             var comment = new Comment(request.Content, null, post);

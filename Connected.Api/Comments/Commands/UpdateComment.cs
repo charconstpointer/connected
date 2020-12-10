@@ -33,7 +33,7 @@ namespace Connected.Api.Comments.Commands
 
             if (comment is null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested comment does not exist");
             }
 
             comment.Content = request.Content;

@@ -33,7 +33,7 @@ namespace Connected.Api.Auth.Commands
         {
             if (string.IsNullOrEmpty(request.Username))
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Username is empty");
             }
 
             var username = request.Username.ToLower().Trim();
@@ -42,7 +42,7 @@ namespace Connected.Api.Auth.Commands
 
             if (user is null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested user does not exist");
             }
 
             if (request.Password != user.Password)

@@ -26,7 +26,7 @@ namespace Connected.Api.Users.Commands
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
             if (user == null)
             {
-                throw new ApplicationException();
+                throw new ApplicationException("Requested user does not exist");
             }
 
             _context.Users.Remove(user);
