@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
+using Connected.Api.Users.Exceptions;
 using Connected.Api.Users.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,10 @@ namespace Connected.Api.Users.Queries
         public async Task<object> Handle(GetUsers request, CancellationToken cancellationToken)
         {
             var users = await _context.Users.ToListAsync(cancellationToken);
+            if (!users.Any())
+            {
+                throw new UsersNotFoundException("Could not find any users");
+            }
             return users.AsDto();
         }
     }

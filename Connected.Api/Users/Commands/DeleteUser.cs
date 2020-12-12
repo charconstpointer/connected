@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Persistence;
+using Connected.Api.Users.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,7 @@ namespace Connected.Api.Users.Commands
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
             if (user == null)
             {
-                throw new ApplicationException("Requested user does not exist");
+                throw new UserNotFoundException($"Could not find a user with id {request.UserId}");
             }
 
             _context.Users.Remove(user);
