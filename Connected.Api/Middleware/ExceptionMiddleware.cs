@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Connected.Api.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -36,12 +37,13 @@ namespace Connected.Api.Middleware
             context.Response.StatusCode = exception switch
             {
                 ApplicationException _ => (int) HttpStatusCode.BadRequest,
+                MyCustomValidationException _ => (int) HttpStatusCode.BadRequest,
                 _ => 500
             };
 
             context.Response.ContentType = "application/json";
 
-            var response = new {exception.Message};
+            var response = new {exception.Message, Errors = exception.Data["Errors"]};
             var json = JsonSerializer.Serialize(response);
             return context.Response.WriteAsync(json);
         }

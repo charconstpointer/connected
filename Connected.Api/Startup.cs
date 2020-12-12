@@ -13,6 +13,8 @@ using System.Reflection;
 using System.Text;
 using Connected.Api.Auth;
 using Connected.Api.Middleware;
+using Connected.Api.Validation;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -45,6 +47,13 @@ namespace Connected.Api
             services.AddControllers();
             services.AddDbContext<ConnectedContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MsSql")));
+            // Add all the assemblies to MediatR
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+
+            AssemblyScanner.FindValidatorsInAssembly(typeof(Startup).Assembly)
+                .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
+
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(PipelineValidator<,>));
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
