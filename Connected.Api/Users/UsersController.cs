@@ -29,21 +29,21 @@ namespace Connected.Api.Users
             return Created("", await _mediator.Send(createUser));
         }
 
-        [HttpGet("userId:int")]
-        public async Task<IActionResult> GetUser(int userId)
+        [HttpGet("{userId:int}")]
+        public async Task<IActionResult> GetUser(int userId, string username)
         {
-            var command = new GetUser {UserId = userId};
+            var command = new GetUser {UserId = userId, Username = username};
             return Ok(await _mediator.Send(command));
         }
 
-        [HttpPut("userId:int")]
+        [HttpPut("{userId:int}")]
         public async Task<IActionResult> UpdateUser(int userId, UpdateUser updateUser)
         {
             updateUser.UserId = userId;
             return Ok(await _mediator.Send(updateUser));
         }
 
-        [HttpDelete("userId:int")]
+        [HttpDelete("{userId:int}")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
             var command = new DeleteUser {UserId = userId};

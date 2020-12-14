@@ -1,22 +1,22 @@
 using System;
-using Connected.Api.Persistence;
-using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
 using Connected.Api.Auth;
 using Connected.Api.Middleware;
+using Connected.Api.Persistence;
 using Connected.Api.Validation;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Connected.Api
 {
@@ -42,6 +42,7 @@ namespace Connected.Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }));
+            services.AddLogging(builder => builder.AddSeq());
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddHttpContextAccessor();
             services.AddControllers();
