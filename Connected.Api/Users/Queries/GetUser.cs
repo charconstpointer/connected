@@ -20,7 +20,6 @@ namespace Connected.Api.Users.Queries
     public class GetUserHandler : IRequestHandler<GetUser, object>
     {
         private readonly ConnectedContext _context;
-
         public GetUserHandler(ConnectedContext context)
         {
             _context = context;

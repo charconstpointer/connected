@@ -25,7 +25,11 @@ namespace Connected.Api.Posts.Queries
 
         public async Task<object> Handle(GetPost request, CancellationToken cancellationToken)
         {
-            var post = await _context.Items.FirstOrDefaultAsync(p => p.Id == request.PostId,
+            var post = await _context.Items
+                .Include(p=>p.Comments)
+                .ThenInclude(c=>c.Author)
+                .Include(p=>p.Poster)
+                .FirstOrDefaultAsync(p => p.Id == request.PostId,
                 cancellationToken: cancellationToken);
             if (post is null)
             {
