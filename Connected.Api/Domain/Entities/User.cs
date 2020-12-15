@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Connected.Api.Domain.Entities
 {
@@ -16,7 +18,7 @@ namespace Connected.Api.Domain.Entities
         public IList<Group> CreatedGroups { get; private set; }
         public IEnumerable<Comment> Comments { get; private set; }
         public IEnumerable<Post> Items { get; private set; }
-        public IEnumerable<UserGroup> Groups { get; private set; }
+        public IList<UserGroup> Groups { get; private set; }
 
         public User(string username, string password, string email)
         {
@@ -31,6 +33,18 @@ namespace Connected.Api.Domain.Entities
 
         protected User()
         {
+        }
+
+        public void AddGroup(Group group)
+        {
+            var userGroup = new UserGroup {Group = @group, User = this};
+            Groups.Add(userGroup);
+            group.AddUser(userGroup);
+        }
+
+        public bool IsInGroup(Group @group)
+        {
+            return Groups.Any(g => g.Group.Id == group.Id);
         }
     }
 

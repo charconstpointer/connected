@@ -21,6 +21,17 @@ namespace Connected.Api.Groups.Extensions
                 CreateDate = group.CreateDate
             };
 
+
+        public static GroupSimpleDto AsSimpleDto(this Group group)
+            => new()
+            {
+                Id = group.Id,
+                Name = group.Name,
+            };
+
+        public static IEnumerable<GroupSimpleDto> AsSimpleDto(this IEnumerable<Group> groups)
+            => groups.Select(AsSimpleDto);
+
         public static IEnumerable<GroupDto> AsDto(this IEnumerable<Group> groups)
             => groups.Select(AsDto);
     }

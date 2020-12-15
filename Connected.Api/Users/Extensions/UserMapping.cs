@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Connected.Api.Domain.Entities;
+using Connected.Api.Groups.Extensions;
 using Connected.Api.Users.Dto;
 
 namespace Connected.Api.Users.Extensions
@@ -14,6 +15,15 @@ namespace Connected.Api.Users.Extensions
                 Email = user.Email
             };
 
+        public static UserDetailedDto AsDetailedDto(this User user)
+            => new UserDetailedDto
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Groups = user.Groups?.Select(g => g.Group).AsSimpleDto()
+            };
+        public static IEnumerable<UserDetailedDto> AsDetailedDto(this IEnumerable<User> users)
+            => users.Select(AsDetailedDto);
         public static IEnumerable<UserDto> AsDto(this IEnumerable<User> users)
             => users.Select(AsDto);
     }

@@ -36,13 +36,16 @@ namespace Connected.Api.Users.Queries
 
             var user = await _context.Users
                 .Include(u => u.Items)
+                .Include(u=>u.Groups)
+                .ThenInclude(g=>g.Group)
                 .FirstOrDefaultAsync(expression, cancellationToken);
+            
             if (user is null)
             {
                 throw new UserNotFoundException($"Could not find a user with id {request.UserId}");
             }
 
-            return user.AsDto();
+            return user.AsDetailedDto();
         }
     }
 }

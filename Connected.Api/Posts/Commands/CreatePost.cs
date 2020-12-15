@@ -38,17 +38,22 @@ namespace Connected.Api.Posts.Commands
                 .Include(g => g.Feed)
                 .ThenInclude(f => f.Items)
                 .ThenInclude(i => i.Comments)
+                .Include(g=>g.Users)
                 .FirstOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken);
 
             if (group is null)
             {
                 throw new ApplicationException($"Group with id {request.GroupId} could not be found");
             }
-
+            
             var user = await _userAccessor.GetUserFromContext(cancellationToken);
-            //TODO Poster
+            
             var post = new Post(request.Body, user, group);
             group.AddPost(post);
+            if (!user.IsInGroup(group))
+            {
+                user.AddGroup(group);
+            }
             await _context.Items.AddAsync(post, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
