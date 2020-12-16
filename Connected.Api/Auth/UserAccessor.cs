@@ -41,6 +41,7 @@ namespace Connected.Api.Auth
             var user = await _connectedContext.Users
                 .Include(u => u.CreatedGroups)
                 .Include(u=>u.Groups)
+                .ThenInclude(g=>g.Group)
                 .SingleOrDefaultAsync(u => u.Username == name,
                     cancellationToken: cancellationToken);
             return user;

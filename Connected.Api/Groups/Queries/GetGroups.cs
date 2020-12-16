@@ -26,6 +26,8 @@ namespace Connected.Api.Groups.Queries
                 .ThenInclude(f=>f.Items)
                 .ThenInclude(i=>i.Comments)
                 .Include(g=>g.Users)
+                .ThenInclude(u=>u.User)
+                // .ThenInclude(u=>u.Groups)
                 .Include(g=>g.Creator)
                 .ToListAsync(cancellationToken);
             return groups.AsDto();

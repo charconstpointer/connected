@@ -17,7 +17,7 @@ namespace Connected.Api.Groups.Extensions
                 Name = group.Name,
                 Posts = group.Feed?.Items?.AsDto(),
                 Tags = group.Tags?.Split(","),
-                Users = group.Users?.Select(u => u?.User)?.AsDto(),
+                Users = group.Users?.Select(u => u?.User).AsDto(),
                 CreateDate = group.CreateDate
             };
 

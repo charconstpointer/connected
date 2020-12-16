@@ -16,7 +16,7 @@ namespace Connected.Api.Users.Extensions
             };
 
         public static UserDetailedDto AsDetailedDto(this User user)
-            => new UserDetailedDto
+            => new()
             {
                 Username = user.Username,
                 Email = user.Email,
