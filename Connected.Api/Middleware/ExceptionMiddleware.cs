@@ -42,9 +42,17 @@ namespace Connected.Api.Middleware
             };
 
             context.Response.ContentType = "application/json";
+            object response;
+            string json;
+            if (exception is MyCustomValidationException)
+            {
+                response = new {Message = exception.Data["Errors"], Errors = exception.Data["Errors"]};
+                json = JsonSerializer.Serialize(response);
+                return context.Response.WriteAsync(json);
+            }
 
-            var response = new {exception.Message, Errors = exception.Data["Errors"]};
-            var json = JsonSerializer.Serialize(response);
+            response = new {exception.Message, Errors = exception.Data["Errors"]};
+            json = JsonSerializer.Serialize(response);
             return context.Response.WriteAsync(json);
         }
     }
