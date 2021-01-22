@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Connected.Api.Auth;
 using Connected.Api.Domain.Entities;
 using Connected.Api.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Connected.Api.Groups.Commands
@@ -38,6 +40,11 @@ namespace Connected.Api.Groups.Commands
                 throw new ApplicationException("user is null");
             }
 
+            var exists = await _context.Groups.AnyAsync(g => g.Name ==request.Name, cancellationToken);
+            if (exists)
+            {
+                throw new ApplicationException($"Group with name {request.Name} already exists");
+            }
             var tags = string.Join(",", request.Tags);
             var group = new Group(request.Name, tags, user);
 
